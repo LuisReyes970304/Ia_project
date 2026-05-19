@@ -14,6 +14,7 @@ window.addEventListener("click", () => {
     burgerContent.classList.remove("active");
 });
 
+// AI Chatbot Logic
 const formAi = document.getElementById("formAi");
 const screenAi = document.querySelector(".screenAi");
 const inputChat = document.getElementById("inputChat");
@@ -62,7 +63,7 @@ formAi.addEventListener("submit", async(e) => {
 
         screenAi.scrollTop = screenAi.scrollHeight;
 
-    },800)
+    },1000)
 
 })
 
