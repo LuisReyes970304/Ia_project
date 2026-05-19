@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mar-bot</h1>
+        <div class="burgerMenu">
+            <button class="burgerButton">≡</button>
+            <div class="burgerContent">
+                <a href="#">Check profile</a>
+                <a href="#">Update profile</a>
+                <a href="#">
+                    <form action="/logout" method="post">
+                        <button class="logout">Logout</button>
+                    </form>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="agentAi">
+            <div class="screenAi"></div>
+            <form id="formAi" action="/submit-query" method="post">
+                <div class="divInput">
+                    <textarea name="inputChat" id="inputChat" placeholder="Write here your prompt"></textarea>
+                </div>
+                <div class="divButton">
+                    <button type="submit" class="submitBtn">&#8250;</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="dashboard.js"></script>
+</body>
+</html>
