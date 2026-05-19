@@ -25,42 +25,72 @@ inputChat.addEventListener("keydown", (e) => {
     }
 });
 
-formAi.addEventListener("submit", (e) => {
+formAi.addEventListener("submit", async(e) => {
     e.preventDefault();
 
-    const message = inputChat.value.trim();
+    const userMessage = inputChat.value.trim();
     inputChat.value = "";
 
-    if(!message) {
+    if(!userMessage ) {
         inputChat.value = "";
         return;
     }
 
-    const userBubble = document.createElement("output");
+    const userBubble = document.createElement("div");
     userBubble.className = "userBubble";
-    userBubble.value = message;
+    userBubble.textContent = userMessage ;
     screenAi.appendChild(userBubble);
 
     screenAi.scrollTop = screenAi.scrollHeight;
 
-    setTimeout(() => {
-        const lowerBubble = userBubble.value.toLocaleLowerCase();
-        if (["hello", "hola", "hi", "hey", "buenos dias"].includes(lowerBubble)) {
-            const botBubble = document.createElement("output");
+    setTimeout(async() => {
+        let cleanMessage = userMessage.toLowerCase();
+        if (["hello", "hola", "hi", "hey", "buenos dias"].includes(cleanMessage)) {
+            const botBubble = document.createElement("div");
             botBubble.className = "botBubble";
-            botBubble.value = "Hello, this is Mar-Bot! How can I help?";
+            botBubble.textContent = "Hello, this is Mar-Bot Medical Assistance! How can I help?";
             screenAi.appendChild(botBubble);
         }
 
         else {
-            const botBubble = document.createElement("output");
+            const botBubble = document.createElement("div");
             botBubble.className = "botBubble";
-            botBubble.value = "Sorry my friend I don't know how to respond to that yet 🙁";
+            const botAnswer = await callOllama(userMessage);
+            botBubble.textContent = botAnswer;
             screenAi.appendChild(botBubble);
         }
 
         screenAi.scrollTop = screenAi.scrollHeight;
 
-    },1000)
+    },800)
 
 })
+
+async function callOllama(userMessage) {
+    const url = 'http://localhost:11434/api/chat';
+
+    const payload = {
+    model: 'llama3.2',
+    messages: [
+        { role: 'system', content: 'You are an expert in clinical terminology.' },
+        { role: 'user', content: userMessage }
+    ],
+    stream: false 
+    };
+
+    try {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+    return data.message.content;
+
+    } catch (error) {
+    console.error('Error:', error);
+    return "There was an issue..."
+    }
+}
+
