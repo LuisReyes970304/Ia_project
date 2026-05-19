@@ -43,21 +43,21 @@ formAi.addEventListener("submit", async(e) => {
 
     screenAi.scrollTop = screenAi.scrollHeight;
 
+    // The bot's response will be added after a short delay to simulate thinking time
+    const botBubble = document.createElement("div");
+    botBubble.className = "botBubble";
+    botBubble.innerHTML = '<p class="loader">Loading...</p>';
+    screenAi.appendChild(botBubble);
+
     setTimeout(async() => {
         let cleanMessage = userMessage.toLowerCase();
         if (["hello", "hola", "hi", "hey", "buenos dias"].includes(cleanMessage)) {
-            const botBubble = document.createElement("div");
-            botBubble.className = "botBubble";
             botBubble.textContent = "Hello, this is Mar-Bot Medical Assistance! How can I help?";
-            screenAi.appendChild(botBubble);
         }
 
         else {
-            const botBubble = document.createElement("div");
-            botBubble.className = "botBubble";
             const botAnswer = await callOllama(userMessage);
             botBubble.textContent = botAnswer;
-            screenAi.appendChild(botBubble);
         }
 
         screenAi.scrollTop = screenAi.scrollHeight;

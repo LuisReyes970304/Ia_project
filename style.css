@@ -239,3 +239,21 @@ main {
     color: var(--button-color)
 }
 
+.loader {
+    width: auto;
+    height: auto;
+    animation: resazing 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes resazing {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
