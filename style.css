@@ -246,6 +246,29 @@ main {
     margin-right: 10px;
 }
 
+.botBubble h1, .botBubble h2, .botBubble h3 {
+    margin: 8px 0 4px 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.botBubble ul, .botBubble ol {
+    padding-left: 20px;
+    margin: 6px 0;
+}
+
+.botBubble li {
+    margin: 4px 0;
+}
+
+.botBubble strong {
+    font-weight: bold;
+}
+
+.botBubble p {
+    margin: 6px 0;
+}
+
 @keyframes resazing {
     0% {
         transform: scale(1);
